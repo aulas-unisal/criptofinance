@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.i3focus.producer</groupId>
-	<artifactId>producer</artifactId>
+	<artifactId>producer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>producer</name>
-	<description>Demo project for Spring Boot Criptofinance Producer Message</description>
+	<name>producer-service</name>
+	<description>Demo project for Spring Boot Criptofinance Producer Service Message</description>
 	<properties>
 		<java.version>11</java.version>
 		<kotlin.version>1.6.21</kotlin.version>
