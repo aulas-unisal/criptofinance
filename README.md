@@ -59,7 +59,10 @@ Criar a variável que terá o valor alterado indicando se está em posição com
 let isOpened = false;
 ```
 
-Abrir conexão com api de stream e habilitar, em modo assíncrono, ficar recebendo informações. Para esse exemplo, uma simples estratégia estará sendo validada dentro do próprio método que está escutando novas mensagens ou atualizações:
+Abrir conexão com api de stream e habilitar, em modo assíncrono, ficar recebendo informações. Para esse exemplo, uma simples estratégia estará sendo validada dentro do próprio método que está escutando novas mensagens ou atualizações.
+
+Para termos uma visão de preço médio de baixa e alta, necessário avaliar o grafico de mercado para o ativo, nesse caso, BTC e usar uma técnica conhecida como `suporte de resistência`. 
+Gráfico em: https://www.binance.com/pt-BR/trade/BTC_BUSD?_from=markets&theme=dark&type=spot 
 
 ```js
 ws.onmessage = async (event) => {
