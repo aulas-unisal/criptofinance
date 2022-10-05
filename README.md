@@ -20,10 +20,15 @@ Para o desenvolvimento do bot, será utilizado Node.js.
 2. Dentro da pasta, executar `npm init -y`
 3. Dentro da pasta, executar `npm install pusher axios crypto ws dotenv`
 4. Dentro da pasta, criar um arquivo chamado `.env` e nele deve conter as seguintes variáveis: 
+
   4.1. `API_URL=https://testnet.binance.vision/api`
+  
   4.2. `STREAM_URL=wss://testnet.binance.vision/ws/`
+  
   4.3. `API_KEY=valor gerado no passo 1`
+  
   4.4. `API_SECRET_KEY=valor gerado no passo 1`
+  
 5. Dentro da pasta, criar um arquivo chamado `index.js`
 
 ### System Desing
