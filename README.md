@@ -37,103 +37,26 @@ PUSHER_APP_CLUSTER  | us2
 5. Dentro da pasta, criar um arquivo chamado `index.js`
 6. Seguir os passos de implementação a seguir (sempre no arquivo `index.js`)
 
-#### Pass3 - Implementação
+#### Passo 3 - Implementação Cryptobot
 
 Todos os passos abaixo, deverão ser sequenciais (um após outro conforme tutorial).
 
-No início do arquivo `index.js` importar as dependencias:
-```js
-require("dotenv").config();
-const axios = require("axios");
-const crypto = require("crypto");
-const WebSocket = require("ws");
-const Pusher = require("pusher");
-```
+Adaptar o `cryptobot` como mostra a imagem abaixo baseando no código fonte presente no repositório:
 
-Criar conexão `WebSocket` com a api de stream da Binance: 
-
-- Par de ativo escolhido: `btcusdt`
-
-```js
-const ws = new WebSocket(process.env.STREAM_URL + "btcusdt@markPrice@1s");
-```
-
-Criar a variável que terá o valor alterado indicando se está em posição comprada (aberto) ou vendida (fechado):
-
-```js
-let isOpened = false;
-```
-
-Configurando Pusher para envio de notificações `pub/sub`:
-```js
-Pusher.logToConsole = true; // Não habilitar log em PROD
-
-const pusher = new Pusher({
-  appId: process.env.PUSHER_APP_ID,
-  key: process.env.PUSHER_APP_KEY,
-  secret: process.env.PUSHER_APP_SECRET,
-  cluster: process.env.PUSHER_APP_CLUSTER,
-  useTLS: true
-});
-```
-
-Abrir conexão com api de stream e habilitar, em modo assíncrono, ficar recebendo informações. Para esse exemplo, uma simples estratégia estará sendo validada dentro do próprio método que está escutando novas mensagens ou atualizações.
+![cryptobot](https://github.com/aulas-unisal/criptofinance/blob/main/cryptobot.png)
 
 Para termos uma visão de preço médio de baixa e alta, necessário avaliar o grafico de mercado para o ativo, nesse caso, BTC e usar uma técnica conhecida como `suporte de resistência`. 
 Gráfico em: https://www.binance.com/pt-BR/trade/BTC_BUSD?_from=markets&theme=dark&type=spot 
 
-```js
-ws.onmessage = async (event) => {
-    const obj = JSON.parse(event.data);
-    console.log("Symbol: " + obj.s);
-    console.log("Mark Price: " + obj.p);
+#### Passo 4 - Implementação Cryptosignals
 
-    const price = parseFloat(obj.p);
-    if(price < 19400 && !isOpened){
-        console.log("Vender!");
-        newOrder("BTCUSDT", "0.001", "SELL");
-        isOpened = true;
-        
-        pusher.trigger("criptofinance-development", "criptobot-sell", {
-          message: JSON.stringify(obj)
-        });
-    }
-    else  if(price <= 19100 && isOpened){
-        console.log("Comprar!");
-        newOrder("BTCUSDT", "0.001", "BUY");
-        isOpened = false;
-        
-        pusher.trigger("criptofinance-development", "criptobot-buy", {
-          message: JSON.stringify(obj)
-        });
-    }
-}
-```
+Seguir os passos de criar um projeto com node.js como indicado no `Passo 2`. 
 
-Criar a função que cria nova order, seja de venda ou de compra:
+Implementar os arquivos no projeto conforme o código presente no repositório.
 
-```js 
-async function newOrder(symbol, quantity, side) {
-    const data = { symbol, quantity, side };
-    data.type = "MARKET";
-    data.timestamp = Date.now();
-
-    const signature = crypto
-        .createHmac("sha256", process.env.SECRET_KEY)
-        .update(new URLSearchParams(data).toString())
-        .digest("hex");
-
-    data.signature = signature;
-
-    const result = await axios({
-        method: "POST",
-        url: process.env.API_URL + "/v1/order?" + new URLSearchParams(data),
-        headers: { "X-MBX-APIKEY": process.env.API_KEY }
-    });
-    console.log(result.data);
-}
-```
+Estrutura do projeto:
+![cryptosignals](https://github.com/aulas-unisal/criptofinance/blob/main/cryptosignals.png)
 
 ### System Desing
 
-![criptofinance](https://github.com/aulas-unisal/criptofinance/blob/main/criptofinance.drawio.png)
+![cryptofinance](https://github.com/aulas-unisal/criptofinance/blob/main/cryptofinance.png)
