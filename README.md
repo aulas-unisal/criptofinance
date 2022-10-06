@@ -45,6 +45,20 @@ Adaptar o `cryptobot` como mostra a imagem abaixo baseando no código fonte pres
 
 ![cryptobot](https://github.com/aulas-unisal/criptofinance/blob/main/cryptobot.png)
 
+Variáveis de ambiente:
+
+```shell
+API_URL=https://testnet.binance.vision/api
+STREAM_URL=wss://testnet.binance.vision/ws/
+API_KEY=
+API_SECRET_KEY=
+PUSHER_APP_ID=1487951
+PUSHER_APP_KEY=f5c7a4cb577986aa4895
+PUSHER_APP_SECRET=9acb182b7197af722a83
+PUSHER_APP_CLUSTER=us2
+PUSHER_CHANNEL=criptofinance-development
+```
+
 Para termos uma visão de preço médio de baixa e alta, necessário avaliar o grafico de mercado para o ativo, nesse caso, BTC e usar uma técnica conhecida como `suporte de resistência`. 
 Gráfico em: https://www.binance.com/pt-BR/trade/BTC_BUSD?_from=markets&theme=dark&type=spot 
 
@@ -56,6 +70,17 @@ Implementar os arquivos no projeto conforme o código presente no repositório.
 
 Estrutura do projeto:
 ![cryptosignals](https://github.com/aulas-unisal/criptofinance/blob/main/cryptosignals.png)
+
+Variáveis de ambiente:
+```shell
+PUSHER_APP_ID=1487951
+PUSHER_APP_KEY=f5c7a4cb577986aa4895
+PUSHER_APP_SECRET=9acb182b7197af722a83
+PUSHER_APP_CLUSTER=us2
+PUSHER_CHANNEL=criptofinance-development
+PUSHER_BUY_EVENT=criptobot-buy
+PUSHER_SELL_EVENT=criptobot-sell
+```
 
 ### System Desing
 
