@@ -1,15 +1,18 @@
 {
-  "name": "criptobot",
+  "name": "cryptobot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Criptobot Binance Test",
   "main": "index.js",
   "scripts": {
-    "start": "npm start"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.3",
+    "pusher": "^5.1.1-beta",
+    "ws": "^8.9.0"
   }
 }
